@@ -1,0 +1,46 @@
+/* 清除默认样式 */
+body,p,h1,h2,h3,h4,h5,h6,ul,ol,dl,dd,dt,li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+  font-family: '微软雅黑';
+  color: #666560;
+}
+
+a {
+  text-decoration: none;
+  color: #666560;
+}
+
+img,input {
+  padding: 0;
+  vertical-align: middle;
+  border: 0 none;
+  outline: none;
+}
+/* 设置浮动 */
+.left {
+  float: left;
+}
+.right {
+  float: right;
+}
+/* 清除浮动 */
+.clearfix::after {
+  content: '.';
+  display: block;
+  clear: both;
+
+  height: 0;
+  line-height: 0;
+  visibility: hidden;
+}
+.clearfix {
+  zoom: 1;
+}
+/* 设置首页版心 */
+// .w {
+//   width: 1200px;
+//   margin: 0 auto;
+// }
