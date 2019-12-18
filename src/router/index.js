@@ -6,16 +6,16 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    redirect: '/elementForm' // 路由的重定向
+    redirect: '/ElementForm' // 路由的重定向
   },
   {
-    path: '/shoppingCar',
-    name: 'shoppingCar',
+    path: '/ShoppingCar',
+    name: 'ShoppingCar',
     component: () => import('../views/ShoppingCar.vue')
   },
   {
-    path: '/elementForm',
-    name: 'elementForm',
+    path: '/ElementForm',
+    name: 'ElementForm',
     component: () => import('../views/ElementForm.vue')
   }
 ]
