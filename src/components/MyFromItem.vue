@@ -24,15 +24,20 @@ export default {
   },
   methods: {
     validator () {
+      // 通过计算动态获取校验规则
       const rules = this.MyForm.rules[this.prop]
-      // const value = this.MyForm.model[this.prop]
-      let descriptor = { [this.prop]: rules } // 描述对象
-      let schema = new Schema(descriptor)
-      schema.validator({}, errors => {
+      // 通过计算[]动态获取用户输入的值
+      const value = this.MyForm.model[this.prop]
+      const descriptor = { [this.prop]: rules } // 描述对象
+      const schema = new Schema(descriptor)
+      // { [this.prop]: value } 此时校验器触发 this.prop为动态获取的校验规则 与用户输入的value做校验 返回error
+      schema.validate({ [this.prop]: value }, errors => {
         if (errors) {
-
+          this.errMessage = errors[0].message
+          this.errStatus = true
         } else {
-
+          this.errMessage = ''
+          this.errStatus = true
         }
       })
     }
@@ -44,5 +49,9 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+p {
+  font-size: 12px;
+  color: red;
+}
 </style>

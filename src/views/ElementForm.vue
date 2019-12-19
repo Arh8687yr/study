@@ -34,7 +34,7 @@
     </div>
     <hr />
     <!-- form form-item 实现  -->
-    <div>
+    <!-- <div>
       <h3>任务二：prop绑定检验规则并校验 label显示文字</h3>
       <my-form-item label="用户名：" prop="username">
         <my-input v-model="form.username"></my-input>
@@ -42,7 +42,7 @@
       <my-form-item label="密码：" prop="password">
         <my-input type="password" v-model="form.password"></my-input>
       </my-form-item>
-    </div>
+    </div> -->
     <hr />
     <!--form 实现  -->
     <div>

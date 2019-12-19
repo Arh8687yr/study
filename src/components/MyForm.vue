@@ -9,7 +9,7 @@ export default {
   provide () {
     return {
       // 把当前的form对象传递出去，使任意的子级都可以访问form上的数据或方法
-      MyFrom: this
+      MyForm: this
     }
   },
   props: {
