@@ -1,0 +1,141 @@
+一、安装方式
+
+  1. vue add router (不需要自己配置router/index.js文件)
+  2. npm install vue-router
+
+二、路由的使用
+
+  1. router/index.js
+     引入Vue
+     引入vue-router
+     配置路由表 routes: []
+     将路由表routes挂载到VueRouter实例并导出实例对象new VueRouter
+  2. main.js
+     引入router/index.js
+     挂载路由到Vue实例
+  3. App.vue
+     使用router-view标签为路由占位
+
+三、路由的模式（Vue默认为hash模式）
+  
+  1. history模式
+  2. hash模式（#）
+  注：修改路由模式：在router/index.js VueRouter实例中，mode: 'history'
+
+四、导航
+
+  <router-link to=""></router-link>
+  相当于一个a标签，to相当于a标签的href
+
+五、路由的命名
+
+  配置路由表时为路由添加name属性
+  <router-link :to="{name: ''}"></router-llink>
+
+六、动态路由
+
+  1. path: 'url/:id' 
+
+     例：path: 'login/user?name=cxk&&age=18'
+
+     获取id： this.$route.params.id
+
+     this.$route {
+        fullpath: '/login/user?name=cxk&age=18',
+        path: '/login/user',
+        params: {
+          id: 'user'
+        },
+        query: {
+          name: 'cxk',
+          age: '18'
+        },
+        hash: '',
+        meta: {}
+     }
+
+     fullpath与path的区别?
+        fullpath会携带完整路径(:id?查询类参数)，path只会携带动态id
+
+     params与query的区别?
+        params解析动态id，query解析查询类参数（常用于查询或数据传递）
+
+  2. 参数属性传递 
+     
+     routes中：
+        path: '/url/:id',
+        props: true
+     页面中：
+        props: ['id']
+
+七、嵌套路由
+
+  routes中：
+    path: '/url/:id',
+    props: true,
+    component: pageA,
+    children: {
+        path:'test',
+        component: pageB
+    }
+
+  此时路由虽发生了改变但是页面仍然是pageA，因为App.vue中的<router-view />是单层路由规则，而pageB中的路由是属于pageA中的<router-view />的，因此需要在pageA中添加嵌套路由的<router-view />
+  
+  pageA中：<router-view></router-view>
+
+八、命名视图（页面中有多个视图容器时）比如三栏布局、顶部栏点击按钮、左侧栏的菜单变化
+
+  routes中：
+    path: '/url',
+    components: {
+      default: Url, // default指未命名视图，默认跳转到Url页面
+      a: Name // 在router-view中name取名为a，以a命名的视图跳转到Name页
+    }
+
+九、导航守卫（路由的钩子）
+
+  1. 全局守卫（每次路由跳转都会触发）<写在main.js中>
+
+      router.beforeEach((to, from, next) => {
+        // 在路由跳转前做出判断，如：判断用户是否登录，如果登录，next()，如未登录，强制跳转到登录页，next('/login')
+      })
+
+      // 生命周期比前置钩子晚一些
+
+      router.beforeReseolve((to, from, next) => {
+
+      })
+
+      router.afterEach((to, from) => {
+
+      })
+
+  2. 路由独享守卫 <写在路由表的路由配置里>
+
+      beforeEnter: (to, from, next) => {
+        // 触发在全局的beforeEach和beforeResolve之间
+      }
+
+  3. 组价内的守卫
+
+      beforeRouteEnter (to, from, next) {
+        // 在渲染该组件的对应路由被 confirm 前调用
+        // 不能获取组件的实例 'this' ，因为当守卫执行前，组件实例还没有被创建
+      }
+
+      beforeRouteUpdate (to, from, next) {
+        // 在当前路由改变，但是该组件复用时调用（如：动态id发生改变时）
+        // 可以访问组件实例 'this' 
+      }
+
+      beforeRouteLeave (to, from, next) {
+        // 导航离开该组件的对应路由时调用
+        // 可以访问组件实例 'this' 
+        // 通常用来禁止用户在还未保存修改前突然离开。该导航可以通过 next(false) 来取消
+      }
+
+  
+     
+
+
+
